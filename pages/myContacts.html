@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Contacts</title>
+<link type="text/css" rel="stylesheet" href="../css/glober.css" />
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="../js/glober.js"></script>
+</head>
+<body>
+	<header class="mainHeader">
+		<hgroup>
+			<h1>My Contacts List</h1>
+			<h2>A little show case of what i got from the UI training</h2>
+		</hgroup>
+		<nav>
+			<ul>
+				<li class="menuItem"><a href="../index.html">Home</a></li>
+				<li class="menuItem"><a href="myContacts.html">Manage My Contacts</a></li>
+				<li class="menuItem"><a href="https://sites.google.com/a/globant.com/trainings-beta/training/web-ui">About the training</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<div id="content">
+		<form id="myContactsForm" onsubmit="return false;">
+			<select id="list" size="10" style="width: 15em"></select><br/>
+			<button id="plusBtn">  +  </button>
+			<button id="minusBtn">  -  </button>
+		</form>
+	</div>
+
+	<footer>
+		<p>Contact Me: <a href="mailto:jorge.sarmiento@globant.com">Jorge Sarmiento</a>
+		<p>&#169; <a href="http://www.globant.com">Globant</a> 2013</p>
+	</footer>
+
+<script src="../js/models/contactModel.js"></script>
+<script src="../js/views/contactListView.js"></script>
+<script src="../js/controllers/myContactsController.js"></script>
+<script>
+	$(function () {
+		var model = new Glober.model.contactListModel(['Ana', 'Juan']),
+			view = new Glober.view.contactListView(model, {
+				'list' : $('#list'), 
+				'addButton' : $('#plusBtn'), 
+				'delButton' : $('#minusBtn')
+			}),
+			controller = new Glober.controller.myContacts(model, view);
+		
+		view.show();
+	});
+</script>
+
+</body>
+</html>
