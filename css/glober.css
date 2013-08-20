@@ -4,6 +4,12 @@ body{
 
 article {
 	padding-top: 30px;
+	margin-left:  50px;
+	margin-right: 50px;
+}
+
+aside{
+	padding-top: 30px;
 	margin-left: 50px;
 	margin-right: 50px;
 }
@@ -27,7 +33,7 @@ select{
 
 .mainHeader{
 	text-align: center;
-	background-color: lime;
+	background-color: #cbd200;
 	padding: 10px;
 	margin-left: 50px;
 	margin-right: 50px;
@@ -39,7 +45,8 @@ select{
 
 .articleHeader{
 	text-align: left;
-	background-color: lime;
+	background-color: #cbd200;
+	padding-left: 2px;
 	margin-left: 5px;
 	margin-right: 5px;
 	border-radius: 5px;
