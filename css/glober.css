@@ -61,6 +61,23 @@ select{
 	margin: 5px;
 }
 
+.left{
+	float:	left;
+}
+
+.right{
+	float: right;
+}
+
+fieldset.fieldBlock{
+	width: 50%;
+	padding-left: 2px;
+	border-radius: 5px;
+	-moz-box-shadow: 5px 5px 5px #888;
+	-webkit-box-shadow: 5px 5px 5px #888;
+	box-shadow: 5px 5px 5px #888;
+}
+
 #content {
 	margin-top: 50px;
 	text-align: center;
