@@ -6,10 +6,38 @@ Glober.model.contactListModel = function( items ){
 	//Attributes
 	this._items = items;
 	this._selectedIndex = -1;
+	this._conn;
 	//Events register
 	this.itemAdded = new Glober.event.Event( this );
 	this.itemRemoved = new Glober.event.Event( this );
 	this.selectedIndexChanged = new Glober.event.Event( this );
+	//Init method
+	this.init = function(){
+		this.getConnection();
+		this._conn.transaction(function( tx ){
+			tx.executeSql("CREATE TABLE CONTACTS( ID REAL UNIQUE, NAME TEXT)", [],
+			null,
+			this.onError);
+		});
+	};	
+	//Private methods
+	this.getConnection = function(){
+		if(this._conn == null){
+			this._conn = window.openDatabase("DbContacts", "1.0", "My contacts DB", 1 * 1024 * 1024);
+		}
+	};
+	this.addRecord = function(index, item , conn ){
+		this._conn.transaction(function(tx){
+			tx.executeSql("INSERT INTO CONTACTS(ID, NAME) VALUES(?, ?)", [ index , item],
+			null,
+			this.onError);
+		});
+	};
+	this.onError = function(tx, error){
+		return error.message;
+	};
+	//call the init method
+	this.init();
 }
 
 Glober.model.contactListModel.prototype = {
@@ -18,6 +46,8 @@ Glober.model.contactListModel.prototype = {
 	},
 	addItem : function( item ){
 		this._items.push( item );
+		this.getConnection();
+		this.addRecord(( this._items.length + 1 ), item, this._conn);
 		this.itemAdded.notify({ item : item });
 	},
 	removeItemAt : function( index ){
@@ -33,7 +63,7 @@ Glober.model.contactListModel.prototype = {
 	getSelectedIndex : function(){
 		return this._selectedIndex;
 	},
-	setSelectedIndex : function( index){
+	setSelectedIndex : function( index ){
 		var previousIndex;
 		
 		previousIndex = this._selectedIndex;
