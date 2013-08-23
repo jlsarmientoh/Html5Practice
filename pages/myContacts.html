@@ -6,52 +6,74 @@
 <link type="text/css" rel="stylesheet" href="../css/glober.css" />
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script src="../js/glober.js"></script>
-</head>
-<body>
-	<header class="mainHeader">
-		<hgroup>
-			<h1>My Contacts List</h1>
-			<h2>A little show case of what i got from the UI training</h2>
-		</hgroup>
-		<nav>
-			<ul>
-				<li class="menuItem"><a href="../index.html">Home</a></li>
-				<li class="menuItem"><a href="myContacts.html">Manage My Contacts</a></li>
-				<li class="menuItem"><a href="https://sites.google.com/a/globant.com/trainings-beta/training/web-ui">About the training</a></li>
-			</ul>
-		</nav>
-	</header>
-
-	<div id="content">
-		<form id="myContactsForm" onsubmit="return false;">
-			<fieldset class="fieldBlock">
-				<select id="list" size="10" style="width: 15em"></select><br/>
-				<button id="plusBtn">  +  </button>
-				<button id="minusBtn">  -  </button>
-			</fieldset>
-		</form>
-	</div>
-
-	<footer>
-		<p>Contact Me: <a href="mailto:jorge.sarmiento@globant.com">Jorge Sarmiento</a>
-<p><a href="http://www.globant.com"><img src="http://www.globant.com/sites/all/themes/globantv2/images/logo_globant.png"/></a>&nbsp;&nbsp;&#169; 2013</p>
-	</footer>
-
+<script src="../js/models/dto/Contact.js"></script>
 <script src="../js/models/contactModel.js"></script>
 <script src="../js/views/contactListView.js"></script>
 <script src="../js/controllers/myContactsController.js"></script>
+</head>
+<body>
+    <header class="mainHeader">
+        <hgroup>
+            <h1>My Contacts List</h1>
+            <h2>A little show case of what i got from the UI training</h2>
+        </hgroup>
+        <nav>
+            <ul>
+                <li class="menuItem"><a href="../index.html">Home</a></li>
+                <li class="menuItem"><a href="myContacts.html">Manage My Contacts</a></li>
+                <li class="menuItem"><a href="https://sites.google.com/a/globant.com/trainings-beta/training/web-ui">About the training</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="form">
+        <form id="myContactsForm" onsubmit="return false;">
+            <fieldset class="fieldBlock">
+                <select id="list" size="10" style="width: 15em"></select><br/>
+                <button id="plusBtn">  +  </button>
+                <button id="minusBtn">  -  </button>
+            </fieldset>
+            <fieldset class="fieldBlock">
+                <label>Name:</label>
+                <input type="text" id="name"/>
+            </fieldset>
+            <fieldset class="fieldBlock">
+                <label>Address:</label>
+                <input type="text" id="address"/>
+            </fieldset>
+            <fieldset class="fieldBlock">
+                <label>Phone:</label>
+                <input type="text" id="phone"/>
+            </fieldset>
+            <fieldset class="fieldBlock">
+                <label>Cell Phone:</label>
+                <input type="text" id="cellPhone"/>
+            </fieldset>
+            <fieldset class="fieldBlock">
+                <label>E-mail:</label>
+                <input type="email" id="email" pattern="[^@]*@[^@]*"/>
+            </fieldset>
+        </form>
+    </div>
+
+    <footer>
+        <p>Contact Me: <a href="mailto:jorge.sarmiento@globant.com">Jorge Sarmiento</a>
+        <p><a href="http://www.globant.com"><img src="http://www.globant.com/sites/all/themes/globantv2/images/logo_globant.png"/></a>&nbsp;&nbsp;&#169; 2013</p>
+    </footer>
+
 <script>
-	$(function () {
-		var model = new Glober.model.contactListModel(['Ana', 'Juan']),
-			view = new Glober.view.contactListView(model, {
-				'list' : $('#list'), 
-				'addButton' : $('#plusBtn'), 
-				'delButton' : $('#minusBtn')
-			}),
-			controller = new Glober.controller.myContacts(model, view);
-		
-		view.show();
-	});
+    $(function () {
+        var model = new Glober.model.contactListModel(),
+            view = new Glober.view.contactListView(model, {
+                'list' : $('#list'), 
+                'addButton' : $('#plusBtn'), 
+                'delButton' : $('#minusBtn'),
+                'form' : $('#myContactsForm')
+            }),
+            controller = new Glober.controller.myContacts(model, view);
+        
+        view.show();
+    });
 </script>
 
 </body>
