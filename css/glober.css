@@ -85,6 +85,14 @@ p.errorIcon{
     background-size: contain;
 }
 
+div.error{
+    text-align: center;
+}
+
+div.success{
+    text-align: center;
+}
+
 fieldset.fieldBlock{
     width: 50%;
     padding-left: 2px;

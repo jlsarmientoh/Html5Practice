@@ -43,8 +43,7 @@ Glober.view.contactListView = function ( model, elements ){
 Glober.view.contactListView.prototype = {
     show : function(){
         this.rebuildList();
-    },
-    
+    },    
     rebuildList : function(){
         var list,
             items,
@@ -60,5 +59,34 @@ Glober.view.contactListView.prototype = {
             }
         }
         this._model.setSelectedIndex( -1 );
+        Glober.util.clearFields( this._elements.form) ;
+    },
+    showMessage : function( message ){
+        this._elements.successPopup.dialog({
+            dialogClass : "no-close",
+            buttons : [
+                {
+                    text : "OK",
+                    click : function(){
+                        $(this).dialog("close");
+                    }
+                }
+            ]
+        });
+        this._elements.successPopup.find("p.msg").text( message);
+    },
+    showError : function( message ){
+        this._elements.errorPopup.dialog({
+            dialogClass : "no-close",
+            buttons : [
+                {
+                    text : "OK",
+                    click : function(){
+                        $(this).dialog("close");
+                    }
+                }
+            ]
+        });
+        this._elements.errorPopup.find("p.msg").text( message);
     }
 };

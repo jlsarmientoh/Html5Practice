@@ -4,7 +4,9 @@
 <meta charset="UTF-8">
 <title>My Contacts</title>
 <link type="text/css" rel="stylesheet" href="../css/glober.css" />
+<link type="text/css" rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 <script src="../js/glober.js"></script>
 <script src="../js/models/dto/Contact.js"></script>
 <script src="../js/models/contactModel.js"></script>
@@ -57,6 +59,10 @@
             </fieldset>
         </form>
     </div>
+    
+    <div id="successPopup" class="success"  title="Success"><p class="msg"/></div>
+    
+    <div id="errorPopup" class="error" title="An error has happened"><p class="msg"/></div>
 
     <footer>
         <p>Contact Me: <a href="mailto:jorge.sarmiento@globant.com">Jorge Sarmiento</a>
@@ -70,7 +76,9 @@
                 'list' : $('#list'), 
                 'addButton' : $('#plusBtn'), 
                 'delButton' : $('#minusBtn'),
-                'form' : $('#myContactsForm')
+                'form' : $('#myContactsForm'),
+                'successPopup' : $('#successPopup'),
+                'errorPopup' : $('errorPopup')
             }),
             controller = new Glober.controller.myContacts(model, view);
         

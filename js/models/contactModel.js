@@ -11,6 +11,8 @@ Glober.model.contactListModel = function(){
     this.itemAdded = new Glober.event.Event( this );
     this.itemRemoved = new Glober.event.Event( this );
     this.selectedIndexChanged = new Glober.event.Event( this );
+    this.fail = new Glober.event.Event( this );
+    this.success = new Glober.event.Event(this );
     //Self referenced this
     var _this = this;
     //Init method
@@ -39,7 +41,7 @@ Glober.model.contactListModel = function(){
             dto.getCellPhone(),
             dto.getEmail()
             ],
-            null,
+            _this.onUpdateSuccess,
             _this.onError);
         });
     };
@@ -48,7 +50,7 @@ Glober.model.contactListModel = function(){
         this._conn.transaction(function(tx){
             tx.executeSql("DELETE FROM CONTACTS WHERE ID = ?",
             [id],
-            null,
+            _this.onUpdateSuccess,
             _this.onError);
         });
     };
@@ -64,7 +66,7 @@ Glober.model.contactListModel = function(){
             dto.getEmail(),
             dto.getId(),
             ],
-            null,
+            _this.onUpdateSuccess,
             _this.onError);
         });
     };
@@ -73,14 +75,17 @@ Glober.model.contactListModel = function(){
         this._conn.transaction(function(tx){
             tx.executeSql("SELECT ID, NAME, ADDRESS, PHONE, CELLPHONE, EMAIL FROM CONTACTS",
             [],
-            _this.onSuccess,
+            _this.onGetSuccess,
             _this.onError);
         });
     };
     this.onError = function( tx, error ){
-        return error.message;
+        _this.fail.notify({ message : error.message});
     };
-    this.onSuccess = function( tx, result){
+    this.onUpdateSuccess = function( tx, result){
+        _this.success.notify({ message : 'Record(s) updated: ' + result.rowsAffected});
+    };
+    this.onGetSuccess = function( tx, result){
         var length = result.rows.length,
             i,
             dto;

@@ -84,4 +84,16 @@ Glober.util.validations.validateForm = function ( form ){
     areFormatFieldsValid = Glober.util.validations.validateFormatFields( form );
     
     return ( areRequiredFieldsValid && areFormatFieldsValid );
-}
+};
+/**
+* Miscellaneous
+*/
+Glober.util.clearFields = function ( form ) {
+    var $fields = form.find(':input');
+    
+    $fields.each(function( index ){
+        var $field = $(this);
+        
+        $field.val('');
+    });
+};

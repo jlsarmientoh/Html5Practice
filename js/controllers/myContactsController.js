@@ -14,6 +14,12 @@ Glober.controller.myContacts = function( model, view){
     this._view.delButtonClicked.attach(function(){
         _this.delItem();
     });
+    this._model.fail.attach(function( sender, args ){
+        _this.onError( args.message );
+    });
+    this._model.success.attach(function( sender, args ){
+        _this.onSuccess( args.message );
+    });
 };
 
 Glober.controller.myContacts.prototype = {
@@ -33,5 +39,11 @@ Glober.controller.myContacts.prototype = {
     },
     updateSelected : function( index ){
         this._model.setSelectedIndex( index );
+    },    
+    onError : function( message ){
+        this._view.showError( message );
+    },    
+    onSuccess : function( message ){
+        this._view.showMessage( message );
     }
 };    
