@@ -24,7 +24,7 @@ Glober.view.contactListView = function ( model, elements ){
     this._elements.addButton.click(function(){
         var dto = new Glober.model.dto.Contact();
         
-        if(Glober.util.validations.validateEmptyFields(_this._elements.form)){
+        if(Glober.util.validations.validateForm(_this._elements.form)){
         
             dto.setName(_this._elements.form.find('#name').val());
             dto.setAddress(_this._elements.form.find('#address').val());

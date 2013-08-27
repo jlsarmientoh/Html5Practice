@@ -53,3 +53,35 @@ Glober.util.validations.validateEmptyFields = function( form ){
     
     return isValid;
 };
+
+Glober.util.validations.validateFormatFields = function( form ){
+   var $fields = form.find('[data-pattern]'),
+       isValid = true;
+       
+    $fields.each(function( index ){
+        var $field = $(this),
+            regex = new RegExp($field.attr('pattern'));
+            
+            regex.compile();
+            
+        if( !regex.test( $field.val() ) ){
+            isValid = false;
+            $field.addClass( "errorField");                
+        }else{
+            $field.removeClass( "errorField");                
+        }
+    });
+    
+    return isValid;
+};
+
+Glober.util.validations.validateForm = function ( form ){
+    var isValid = true,
+        areRequiredFieldsValid = true,
+        areFormatFieldsValid = true;
+    
+    areRequiredFieldsValid = Glober.util.validations.validateEmptyFields( form );
+    areFormatFieldsValid = Glober.util.validations.validateFormatFields( form );
+    
+    return ( areRequiredFieldsValid && areFormatFieldsValid );
+}
