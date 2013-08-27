@@ -8,8 +8,8 @@ Glober.controller.myContacts = function( model, view){
     this._view.listModified.attach(function( sender, args){
         _this.updateSelected(args.index);
     });
-    this._view.addButtonClicked.attach(function( item ){
-        _this.addItem( item );
+    this._view.addButtonClicked.attach(function( sender, args ){
+        _this.addItem( args.item );
     });
     this._view.delButtonClicked.attach(function(){
         _this.delItem();

@@ -24,15 +24,18 @@ Glober.view.contactListView = function ( model, elements ){
     this._elements.addButton.click(function(){
         var dto = new Glober.model.dto.Contact();
         
-        dto.setName(_this._elements.form.find('#name').value);
-        dto.setAddress(_this._elements.form.find('#address').value);
-        dto.setPhone(_this._elements.form.find('#phone').value);
-        dto.setCellPhone(_this._elements.form.find('#cellPhone').value);
-        dto.setEmail(_this._elements.form.find('#email').value);
+        if(Glober.util.validations.validateEmptyFields(_this._elements.form)){
         
-        _this.addButtonClicked.notify( dto );
+            dto.setName(_this._elements.form.find('#name').val());
+            dto.setAddress(_this._elements.form.find('#address').val());
+            dto.setPhone(_this._elements.form.find('#phone').val());
+            dto.setCellPhone(_this._elements.form.find('#cellPhone').val());
+            dto.setEmail(_this._elements.form.find('#email').val());
+            
+            _this.addButtonClicked.notify( { item : dto} );
+        }
     });
-    this._elements.delButton.click(function(){
+    this._elements.delButton.click(function(){        
         _this.delButtonClicked.notify();
     });
 };
@@ -53,7 +56,7 @@ Glober.view.contactListView.prototype = {
         items = this._model.getItems();
         for( key in items ){
             if( items.hasOwnProperty( key ) ){
-                list.append($('<option>' + items[key].getName() + '</option>'));
+                list.append($('<option value=\"' + items[key].getId() + '\">' + items[key].getName() + '</option>'));
             }
         }
         this._model.setSelectedIndex( -1 );

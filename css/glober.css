@@ -69,6 +69,22 @@ select{
     float: right;
 }
 
+.errorField{
+    border-color: red;
+    background-color: lightsalmon;
+    background-image: url(../img/alert.jpg);
+    background-repeat: no-repeat;
+    background-position-x: right;
+    background-size: contain;
+}
+
+p.errorIcon{
+    background-image: url(../img/alert.jpg);
+    background-repeat: no-repeat;
+    background-position-x: right;
+    background-size: contain;
+}
+
 fieldset.fieldBlock{
     width: 50%;
     padding-left: 2px;
@@ -76,6 +92,13 @@ fieldset.fieldBlock{
     -moz-box-shadow: 5px 5px 5px #888;
     -webkit-box-shadow: 5px 5px 5px #888;
     box-shadow: 5px 5px 5px #888;
+    margin-top: 10px;
+}
+
+fieldset.buttonBlock{
+    width: 50%;
+    border : none;
+    margin-top: 10px;
 }
 
 div.form{
