@@ -18,8 +18,13 @@ Glober.view.contactListView = function ( model, elements ){
     });
     
     //attach listeners to HTML controls
-    this._elements.list.change(function( e ){
-        _this.listModified.notify({ index : e.target.selectedIndex });
+    this._elements.list.selectable({
+        stop: function(){
+            $('.ui-selected', this).each(function(){
+                var selectedIndex = $('#selectable li').index( this );
+                _this.listModified.notify({ index : selectedIndex });
+            });
+        }
     });
     this._elements.addButton.click(function(){
         var dto = new Glober.model.dto.Contact();
@@ -55,11 +60,11 @@ Glober.view.contactListView.prototype = {
         items = this._model.getItems();
         for( key in items ){
             if( items.hasOwnProperty( key ) ){
-                list.append($('<option value=\"' + items[key].getId() + '\">' + items[key].getName() + '</option>'));
+                list.append($('<li class=\"ui-widget-content\"">' + items[key].getName() + '</li>'));
             }
         }
         this._model.setSelectedIndex( -1 );
-        Glober.util.clearFields( this._elements.form) ;
+        Glober.util.clearFields( this._elements.form ) ;
     },
     showMessage : function( message ){
         this._elements.successPopup.dialog({

@@ -28,42 +28,44 @@
         </nav>
     </header>
 
-    <div class="form">
-        <form id="myContactsForm" onsubmit="return false;">
-            <fieldset class="fieldBlock">
-                <select id="list" size="10" style="width: 15em"></select><br/>
-            </fieldset>
-            <fieldset class="fieldBlock">
-                <label>Name:</label>
-                <input type="text" id="name" data-required="true"/>
-            </fieldset>
-            <fieldset class="fieldBlock">
-                <label>Address:</label>
-                <input type="text" id="address" data-required="true"/>
-            </fieldset>
-            <fieldset class="fieldBlock" >
-                <label>Phone:</label>
-                <input type="text" id="phone"/>
-            </fieldset>
-            <fieldset class="fieldBlock">
-                <label>Cell Phone:</label>
-                <input type="text" id="cellPhone"/>
-            </fieldset>
-            <fieldset class="fieldBlock">
-                <label>E-mail:</label>
-                <input type="email" id="email" data-required="true"/>
-            </fieldset>
-            <fieldset class="buttonBlock">
-                <button id="plusBtn">  +  </button>
-                <button id="minusBtn">  -  </button>                
-            </fieldset>
-        </form>
+    <div class="content">
+        <div class="left">
+            <ol id="selectable"></ol>
+        </div>
+        <div class="form right">
+            <form id="myContactsForm" onsubmit="return false;">                
+                <fieldset class="fieldBlock">
+                    <label>Name:</label>
+                    <input type="text" id="name" data-required="true"/>
+                </fieldset>
+                <fieldset class="fieldBlock">
+                    <label>Address:</label>
+                    <input type="text" id="address" data-required="true"/>
+                </fieldset>
+                <fieldset class="fieldBlock" >
+                    <label>Phone:</label>
+                    <input type="text" id="phone"/>
+                </fieldset>
+                <fieldset class="fieldBlock">
+                    <label>Cell Phone:</label>
+                    <input type="text" id="cellPhone"/>
+                </fieldset>
+                <fieldset class="fieldBlock">
+                    <label>E-mail:</label>
+                    <input type="email" id="email" data-required="true"/>
+                </fieldset>
+                <fieldset class="buttonBlock">
+                    <button id="plusBtn">  +  </button>
+                    <button id="minusBtn">  -  </button>                
+                </fieldset>
+            </form>
+        </div>
     </div>
     
     <div id="successPopup" class="success"  title="Success"><p class="msg"/></div>
     
     <div id="errorPopup" class="error" title="An error has happened"><p class="msg"/></div>
-
+    
     <footer>
         <p>Contact Me: <a href="mailto:jorge.sarmiento@globant.com">Jorge Sarmiento</a>
         <p><a href="http://www.globant.com"><img src="http://www.globant.com/sites/all/themes/globantv2/images/logo_globant.png"/></a>&nbsp;&nbsp;&#169; 2013</p>
@@ -73,10 +75,10 @@
     $(function () {
         var model = new Glober.model.contactListModel(),
             view = new Glober.view.contactListView(model, {
-                'list' : $('#list'), 
-                'addButton' : $('#plusBtn'), 
+                'list' : $('#selectable'),
+                'addButton' : $('#plusBtn'),
                 'delButton' : $('#minusBtn'),
-                'form' : $('#myContactsForm'),
+                'form' : $('#myContactsForm'),                
                 'successPopup' : $('#successPopup'),
                 'errorPopup' : $('errorPopup')
             }),
